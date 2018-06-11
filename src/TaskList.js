@@ -1,12 +1,8 @@
 import React, {Component} from "react";
+import TodoItem from "./TodoItem.js";
 
 class TaskList extends Component{
 
-
-  removeElement(id)
-  {
-
-  }
   render()
   {
     return (
@@ -14,7 +10,8 @@ class TaskList extends Component{
         <ul>
         {
           this.props.taskList.map((x, index)=>{
-          return (<li key = {index}><input type = "checkbox"/><span>{x}</span><button/></li>)
+              debugger;
+          return <TodoItem key= {x.id}  item = {x} />
           })
         }
         </ul>

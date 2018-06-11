@@ -16,7 +16,7 @@ class TodoItem extends Component{
       });
     }
 
-    removeElement()
+    removeElement(id)
     {
       debugger;
     }
@@ -28,7 +28,7 @@ class TodoItem extends Component{
             <div>
               <input type = "checkbox" checked = {this.state.checkedValue} onChange = {(e)=>this.toggle(e)}/>
               {this.props.item.task}
-              <button onClick = {()=>this.removeElement()} >Remove</button>
+              <button onClick = {(this.prop.item.id)=>this.removeElement(id)} >Remove</button>
             </div>
         </li>
 

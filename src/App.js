@@ -6,7 +6,7 @@ class App extends Component{
   constructor()
   {
     super();
-    this.state = {task:'' , listOfTasks : []};
+    this.state = {id : 0,task:'' , listOfTasks : []};
   }
 
   handleChange(e)
@@ -18,10 +18,17 @@ class App extends Component{
   {
     if(e.keyCode === 13)
     {
-      let task  = this.state.task;
+      let task  =
+      {
+        "id" : this.state.id,
+        "task" : this.state.task,
+        "Completed" : false
+      }
+
       this.setState(
         {
           task : '',
+          id : this.state.id+1,
           listOfTasks : [task ,...this.state.listOfTasks]
         }
       );
@@ -32,8 +39,10 @@ class App extends Component{
   render(){
     return(
       <div>
+        <h3>Todos</h3>
         <input placeholder = "What needs to be done?" onKeyDown = {(e)=>this.addTaskToList(e)} onChange = {(e)=>this.handleChange(e)}></input>
         <TaskList taskList = {this.state.listOfTasks} />
+        <a href = "#">All</a> <a href  = "#">Active</a> <a href = "#">Completed</a>
       </div>
     );
   }
