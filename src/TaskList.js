@@ -10,8 +10,7 @@ class TaskList extends Component{
         <ul>
         {
           this.props.taskList.map((x, index)=>{
-              debugger;
-          return <TodoItem key= {x.id}  item = {x} />
+          return <TodoItem toggleTaskActive = {(id)=>this.props.toggleTaskActive(id)} removeElement = {(id) => this.props.removeElement(id)} key= {x.id}  item = {x} />
           })
         }
         </ul>

@@ -6,7 +6,7 @@ class App extends Component{
   constructor()
   {
     super();
-    this.state = {id : 0,task:'' , listOfTasks : []};
+    this.state = {task:'' , listOfTasks : []};
   }
 
   handleChange(e)
@@ -20,7 +20,7 @@ class App extends Component{
     {
       let task  =
       {
-        "id" : this.state.id,
+        "id" : Date.now(),
         "task" : this.state.task,
         "Completed" : false
       }
@@ -28,7 +28,7 @@ class App extends Component{
       this.setState(
         {
           task : '',
-          id : this.state.id+1,
+          id : Date.now(),
           listOfTasks : [task ,...this.state.listOfTasks]
         }
       );
@@ -36,12 +36,35 @@ class App extends Component{
 
   }
 
+  toggleTaskActive(id)
+  {
+    var listOfTasks  = this.state.listOfTasks;
+    for( var x in listOfTasks)
+    {
+      if(listOfTasks[x].id === id)
+      {
+        listOfTasks[x].Completed  = !listOfTasks[x].Completed ;
+      }
+    }
+  }
+
+  removeElement(id)
+  {
+    var listOfTasks  = this.state.listOfTasks;
+    this.setState({listOfTasks : listOfTasks.filter(ele=>
+        {
+            return ele.id!==id
+        })
+      }
+    );
+  }
+
   render(){
     return(
       <div>
         <h3>Todos</h3>
         <input placeholder = "What needs to be done?" onKeyDown = {(e)=>this.addTaskToList(e)} onChange = {(e)=>this.handleChange(e)}></input>
-        <TaskList taskList = {this.state.listOfTasks} />
+        <TaskList toggleTaskActive= {(id)=>this.toggleTaskActive(id)} removeElement = {(id) => this.removeElement(id)} taskList = {this.state.listOfTasks} />
         <a href = "#">All</a> <a href  = "#">Active</a> <a href = "#">Completed</a>
       </div>
     );

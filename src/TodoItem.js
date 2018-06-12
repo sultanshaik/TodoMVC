@@ -9,16 +9,18 @@ class TodoItem extends Component{
       this.state = {checkedValue :false}
     }
 
-    toggle(e)
+    toggle(e, id)
     {
       this.setState({
         checkedValue : e.target.checked
       });
+      this.props.toggleTaskActive(id);
     }
 
     removeElement(id)
     {
       debugger;
+      this.props.removeElement(id);
     }
 
     render()
@@ -26,9 +28,9 @@ class TodoItem extends Component{
       return (
         <li>
             <div>
-              <input type = "checkbox" checked = {this.state.checkedValue} onChange = {(e)=>this.toggle(e)}/>
+              <input type = "checkbox" checked = {this.state.checkedValue} onChange = {(e)=>this.toggle(e, this.props.item.id)}/>
               {this.props.item.task}
-              <button onClick = {(this.prop.item.id)=>this.removeElement(id)} >Remove</button>
+              <button onClick = {(e)=>this.removeElement(this.props.item.id)} >Remove</button>
             </div>
         </li>
 
